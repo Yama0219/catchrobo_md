@@ -495,7 +495,7 @@ void find_origin() {
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
 
 //  Origin switch wo sagasu
-  while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_RESET) {
+  while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET) {
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100);
   }
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 0);
