@@ -498,6 +498,7 @@ void find_origin() {
   while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET) {
     __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100);
   }
+
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 0);
   angle = 0;
   __HAL_TIM_SET_COUNTER(&htim1, 0);
