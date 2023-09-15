@@ -36,7 +36,7 @@
 #define ENCODER_PR 2000
 #define PULLEY_RATIO 0.25f
 #define FILTER_C 0.8f
-#define POWER_LMT 500
+#define POWER_LMT 200
 
 #define kp 2.0f
 #define ki 0.0f
@@ -130,18 +130,19 @@ int main(void)
   SETPIDGAIN(&hpid, kp, ki, kd);
 
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
-  find_origin();
+//  find_origin();
   HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
   HAL_TIM_Base_Start_IT(&htim2); // PID control
   HAL_TIM_Base_Start_IT(&htim4);
 
-  HAL_UART_Receive_IT(&huart2, uart_buf, UART_BUF_LEN);
+//  HAL_UART_Receive_IT(&huart2, uart_buf, UART_BUF_LEN);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+//    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 200);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -496,7 +497,7 @@ void find_origin() {
 
 //  Origin switch wo sagasu
   while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_RESET) {
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100);
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 50);
   }
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 0);
   angle = 0;
