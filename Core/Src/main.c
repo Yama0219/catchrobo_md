@@ -496,7 +496,7 @@ void find_origin() {
 
 //  Origin switch wo sagasu
   while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_RESET) {
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100);
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 50);
   }
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 0);
   angle = 0;
