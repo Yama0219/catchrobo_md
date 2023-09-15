@@ -36,7 +36,7 @@
 #define ENCODER_PR 2000
 #define PULLEY_RATIO 0.25f
 #define FILTER_C 0.8f
-#define POWER_LMT 500
+#define POWER_LMT 200
 
 #define kp 2.0f
 #define ki 0.0f
