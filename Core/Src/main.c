@@ -36,7 +36,7 @@
 #define ENCODER_PR 2000
 #define PULLEY_RATIO 0.25f
 #define FILTER_C 0.8f
-#define POWER_LMT 500
+#define POWER_LMT 200
 
 #define kp 2.0f
 #define ki 0.0f
@@ -496,7 +496,7 @@ void find_origin() {
 
 //  Origin switch wo sagasu
   while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET) {
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100);
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 50);
   }
 
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 0);
