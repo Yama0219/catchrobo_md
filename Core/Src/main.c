@@ -36,11 +36,11 @@
 #define ENCODER_PR 2000
 #define PULLEY_RATIO 0.21f
 #define FILTER_C 0.8f
-#define POWER_LMT 200
+#define POWER_LMT 350
 
-#define kp 2.0f
-#define ki 0.0f
-#define kd 0.0f
+#define kp 23.0f
+#define ki 18.0f
+#define kd 1.5f
 
 
 #define POLARITY 0
@@ -72,6 +72,7 @@ float target = 0; // Mokuhyou kakudo unit:degree
 
 int16_t enc_buff = 0;
 
+int duty = 0;
 
 uint8_t uart_buf[UART_BUF_LEN];
 /* USER CODE END PV */
@@ -135,7 +136,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2); // PID control
   HAL_TIM_Base_Start_IT(&htim4);
 
-//  HAL_UART_Receive_IT(&huart2, uart_buf, UART_BUF_LEN);
+  HAL_UART_Receive_IT(&huart2, uart_buf, UART_BUF_LEN);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -544,7 +545,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     angle += counter_to_deg(enc_buff);
 
   // PID no keisann
-    int duty = calc_PID(&hpid, target, angle, 0.01f);
+    duty = calc_PID(&hpid, target, angle, 0.01f);
 
   // syuturyoku no jougenn ya anti-windup no settei
     if (duty > POWER_LMT) {
@@ -578,7 +579,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     /* Timer Interrupt(50Hz) */
 //todo koko ni CAN de kakudo wo nagasu Code wo kakeba 50Hz de kakudo ga syuturyoku sareru
 
- printf("%.2f, %.2f\r\n", angle, target);
+ printf("%.2f, %.2f, %d\r\n", angle, target, duty);
 
   }
 
