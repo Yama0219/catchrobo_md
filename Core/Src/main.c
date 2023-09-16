@@ -42,6 +42,7 @@
 #define ki 18.0f
 #define kd 1.5f
 
+#define LINK_NUM 0
 
 #define POLARITY 0
 
