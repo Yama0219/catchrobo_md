@@ -34,7 +34,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define ENCODER_PR 2000
-#define PULLEY_RATIO 0.25f
+#define PULLEY_RATIO 0.21f
 #define FILTER_C 0.8f
 #define POWER_LMT 200
 
