@@ -507,6 +507,8 @@ void find_origin() {
 //  saido PID wo yuukou ni suru
   HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
   HAL_TIM_Base_Start_IT(&htim2);
+
+  target = 45;
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
