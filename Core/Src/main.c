@@ -34,16 +34,16 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define ENCODER_PR 2000
-#define PULLEY_RATIO 0.25f
+#define PULLEY_RATIO 0.21f
 #define FILTER_C 0.8f
-#define POWER_LMT 200
+#define POWER_LMT 150
 
-#define kp 2.0f
-#define ki 0.0f
-#define kd 0.0f
+#define kp 7.0f
+#define ki 5.2f
+#define kd 0.2f
 
 
-#define POLARITY 0
+#define POLARITY 1
 
 #define UART_BUF_LEN 3
 
@@ -68,6 +68,7 @@ PIDparamshandleTypeDef hpid = {0}; // PID no tameno hensuu wo matometa yatsu (ER
 
 float angle = 0; //Jissai no kakudo unit:degree
 float target = 0; // Mokuhyou kakudo unit:degree
+int duty = 0;
 /* PID ga ugoiteiru aida ha "angle" wo "target" no atai ni siyou to suru */
 
 int16_t enc_buff = 0;
@@ -142,6 +143,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+//    printf("%f\r\n", angle);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -496,7 +498,7 @@ void find_origin() {
 
 //  Origin switch wo sagasu
   while (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_SET) {
-    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 50);
+    __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 100);
   }
 
   __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 0);
@@ -506,6 +508,7 @@ void find_origin() {
 //  saido PID wo yuukou ni suru
   HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Start_IT(&htim4);
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
@@ -540,11 +543,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   // kakudo wo yomitoru
     enc_buff = __HAL_TIM_GET_COUNTER(&htim1);
-    __HAL_TIM_SET_COUNTER(&htim1, 0);
-    angle += counter_to_deg(enc_buff);
+//    __HAL_TIM_SET_COUNTER(&htim1, 0);
+    angle = counter_to_deg(enc_buff);
 
   // PID no keisann
-    int duty = calc_PID(&hpid, target, angle, 0.01f);
+    duty = calc_PID(&hpid, target, angle, 0.01f);
 
   // syuturyoku no jougenn ya anti-windup no settei
     if (duty > POWER_LMT) {
@@ -578,7 +581,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     /* Timer Interrupt(50Hz) */
 //todo koko ni CAN de kakudo wo nagasu Code wo kakeba 50Hz de kakudo ga syuturyoku sareru
 
- printf("%.2f, %.2f\r\n", angle, target);
+ printf("%.2f, %.2f, %d\r\n", angle, target, duty);
 
   }
 
