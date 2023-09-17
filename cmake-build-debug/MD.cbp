@@ -243,6 +243,9 @@
 		<Unit filename="C:/Users/kenke/Desktop/Univ/T-semi/catchrobo/catchrobo_md/Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_exti.h">
 			<Option target="MD.elf"/>
 		</Unit>
+		<Unit filename="C:/Users/kenke/Desktop/Univ/T-semi/catchrobo/catchrobo_md/Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_fdcan.h">
+			<Option target="MD.elf"/>
+		</Unit>
 		<Unit filename="C:/Users/kenke/Desktop/Univ/T-semi/catchrobo/catchrobo_md/Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h">
 			<Option target="MD.elf"/>
 		</Unit>
@@ -340,6 +343,9 @@
 			<Option target="MD.elf"/>
 		</Unit>
 		<Unit filename="C:/Users/kenke/Desktop/Univ/T-semi/catchrobo/catchrobo_md/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c">
+			<Option target="MD.elf"/>
+		</Unit>
+		<Unit filename="C:/Users/kenke/Desktop/Univ/T-semi/catchrobo/catchrobo_md/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_fdcan.c">
 			<Option target="MD.elf"/>
 		</Unit>
 		<Unit filename="C:/Users/kenke/Desktop/Univ/T-semi/catchrobo/catchrobo_md/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c">
